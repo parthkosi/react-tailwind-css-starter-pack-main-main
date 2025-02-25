@@ -4,22 +4,22 @@ import { Link, useNavigate } from "react-router-dom";
 function Form() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // ✅ Hook for navigation
+  const navigate = useNavigate(); // Hook for navigation
 
   function handleLogin(event) {
     event.preventDefault(); // Prevent form submission refresh
     if (email && password) {
-      navigate("/GroupPage"); // ✅ Navigate to GroupPage after login
+      navigate("/GroupPage"); // Navigate to GroupPage after login
     }
   }
   return (
-    <div>
-      <div className="w-full max-w-md p-10 bg-white shadow-lg rounded-xl ml-3 items-center justify-center m-8">
-        <h1 className="text-2xl mb-6">Log in</h1>
+    <div className="bg-gray-100 w-[100vw]  flex items-center justify-center">
+      <div className=" w-full max-w-md p-14 bg-white shadow-lg rounded-xl ml-3 items-center justify-center m-8">
+        <h1 className="text-4xl mb-6 flex  justify-center">Log in</h1>
 
         <form onSubmit={handleLogin}>
           {" "}
-          {/* ✅ Form submission calls handleLogin */}
+          {/*  Form submission calls handleLogin */}
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">
               Email address

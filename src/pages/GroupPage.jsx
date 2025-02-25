@@ -9,9 +9,12 @@ const GroupPage = () => {
         <li className="px-8 py-4">Friends</li>
         <li className="px-8 py-8">Activity</li>
       </ul>
-      <button className=" px-4 py-4 text-white bg-teal-500 rounded-full shadow-md hover:bg-teal-600 m-5">
-        <Link to="/Login"> Back </Link>
-      </button>
+
+      <Link to="/Login">
+        <button className=" px-4 py-4 text-white bg-teal-500 rounded-full shadow-md hover:bg-teal-600 m-5">
+          Back
+        </button>
+      </Link>
     </div>
   );
 };

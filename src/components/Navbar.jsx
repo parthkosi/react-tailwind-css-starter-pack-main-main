@@ -5,7 +5,7 @@ const Navbar = () => {
     <div className="flex justify-between items-center px-8 py-4 bg-black ">
       <button className="text-white text-xl font-bold cursor-pointer">
         <Link to="/"> Splitwise</Link>
-      </button>   
+      </button>
       <div>
         {/* Login Button */}
         <Link to="/Login">
