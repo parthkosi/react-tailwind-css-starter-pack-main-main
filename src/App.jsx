@@ -9,7 +9,10 @@ import LoginPage from "./pages/LoginPage";
 import GroupPage from "./pages/GroupPage";
 import NotFound from "./components/NotFound";
 import HomePage from "./pages/HomePage";
-import SignupForm from "./pages/SignupPage";
+import SignupPage from "./pages/SignupPage";
+import Groups from "./components/Groups";
+
+
 
 function Layout() {
   const location = useLocation();
@@ -25,7 +28,8 @@ function Layout() {
         <Route path="/" element={<HomePage />} />
         <Route path="/Login" element={<LoginPage />} />
         <Route path="/GroupPage" element={<GroupPage />} />
-        <Route path="/Signup" element={<SignupForm />} />
+        <Route path="/GroupPage/Groups" element={<Groups />} />
+        <Route path="/Signup" element={<SignupPage />} />
         <Route path="*" element={<NotFound />} />
 
       </Routes>

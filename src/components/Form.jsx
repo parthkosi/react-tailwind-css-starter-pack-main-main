@@ -78,7 +78,7 @@ function Form() {
           <div className="flex-1 border-t border-gray-300"></div>
         </div>
 
-        <button className="w-full py-2 text-black border-black-800 border-b-4 rounded-md hover:bg-gray-200 border border-black-800 mb-4">
+        <button className="w-full py-2 text-black border-black border-b-4 rounded-md hover:bg-gray-200 border border-black-800 mb-4">
           Sign in with Google
         </button>
       </div>
