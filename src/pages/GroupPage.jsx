@@ -8,6 +8,7 @@ import Account from "../components/Account";
 import Dashboard from "../components/Dashboard";
 
 const sections = {
+  Dashboard: <Dashboard />,
   Groups: <Groups />,
   Friends: <Friends />,
   Activity: <Activity />,
@@ -15,9 +16,9 @@ const sections = {
 };
 
 const GroupPage = () => {
-  // Retrieve selected section from localStorage, defaulting to "Groups"
+  // Retrieve selected section from localStorage, defaulting to "Dashboard"
   const [selectedSection, setSelectedSection] = useState(
-    localStorage.getItem("selectedSection") || <Dashboard/>
+    localStorage.getItem("selectedSection") || "Dashboard"
   );
 
   useEffect(() => {
@@ -31,14 +32,21 @@ const GroupPage = () => {
 
   // Function to handle logout
   const handleLogout = () => {
-    localStorage.removeItem("selectedSection"); // Clear section on logout
+    localStorage.removeItem("selectedSection");
+    setSelectedSection("Dashboard");
   };
 
   return (
-    <div className="w-full min-h-screen">
-      <Navbar />
-      <div className="flex bg-gray-100 min-h-[calc(100vh-4rem)]">
-        <nav className="flex flex-col bg-white w-48 border-r border-gray-300">
+    <div className="h-screen flex flex-col bg-gray-100">
+      {/*  Fixed Navbar */}
+      <div className="fixed top-0 left-0 w-full z-50 bg-white shadow-md">
+        <Navbar />
+      </div>
+
+      {/*  Main Content Wrapper */}
+      <div className="flex flex-grow pt-16">
+        {/*  Fixed Sidebar */}
+        <nav className="fixed top-16 left-0 h-[calc(100vh-4rem)] w-48 bg-white border-r border-black flex flex-col shadow-lg">
           <div className="flex flex-col">
             {Object.keys(sections).map((section) => (
               <button
@@ -46,7 +54,7 @@ const GroupPage = () => {
                 onClick={() => handleNavigation(section)}
                 className={`p-3 hover:bg-gray-50 border-b border-gray-200 ${
                   selectedSection === section
-                    ? "text-black font-semibold"
+                    ? "text-black font-semibold bg-gray-100"
                     : "text-gray-600"
                 }`}
               >
@@ -54,6 +62,8 @@ const GroupPage = () => {
               </button>
             ))}
           </div>
+
+          {/* Logout Button */}
           <div className="mt-auto p-2 border-t border-gray-200">
             <Link to="/Login" onClick={handleLogout}>
               <button className="w-full py-2.5 bg-teal-500 hover:bg-teal-600 text-white rounded-md transition-colors">
@@ -62,9 +72,10 @@ const GroupPage = () => {
             </Link>
           </div>
         </nav>
-        <div className="flex-1 p-8">
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <h1 className="text-2xl font-semibold mb-4">{selectedSection}</h1>
+
+        {/*  Main Content Area */}
+        <div className="ml-48 flex-1 overflow-y-auto">
+          <div className="bg-white rounded-lg  ">
             {sections[selectedSection]}
           </div>
         </div>

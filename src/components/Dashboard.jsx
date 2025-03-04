@@ -1,12 +1,12 @@
-import React from 'react'
-
+import React from "react";
 
 const Dashboard = () => {
   return (
     <div>
-      fnfncfgbcvbdgb vh vb vhn
+    
+      <p>This is Dashboard Page</p>
     </div>
-  )
-}
+  );
+};
 
 export default Dashboard;

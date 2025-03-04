@@ -1,22 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 const Navbar = () => {
   return (
-    <div className="flex justify-between items-center px-8 py-4 bg-black ">
-      <button className="text-white text-xl font-bold cursor-pointer">
-        <Link to="/"> Splitwise</Link>
-      </button>
-      <div>
+    <div className="fixed top-0 left-0 w-full bg-black shadow-md px-6 py-3 flex justify-between items-center z-50">
+      {/*  Logo */}
+      <Link to="/" className="text-white text-2xl font-bold">
+        Splitwise
+      </Link>
+
+      {/*  Buttons */}
+      <div className="flex space-x-4">
         {/* Login Button */}
         <Link to="/Login">
-          <button className="px-4 py-2 text-white text-sm cursor-pointer border">
+          <button className="px-4 py-2 text-white text-sm border border-white rounded-md hover:bg-white hover:text-black transition">
             Log in
           </button>
         </Link>
 
         {/* Sign Up Button */}
         <Link to="/SignUp">
-          <button className="bg-teal-500 text-white text-sm cursor-pointer px-4 py-2 rounded-md shadow-md hover:bg-teal-600">
+          <button className="bg-teal-500 text-white text-sm px-4 py-2 rounded-md shadow-md hover:bg-teal-600 transition">
             Sign up
           </button>
         </Link>
@@ -24,4 +28,5 @@ const Navbar = () => {
     </div>
   );
 };
+
 export default Navbar;

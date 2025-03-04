@@ -13,20 +13,20 @@ function Form() {
     }
   }
   return (
-    <div className="bg-gray-100 w-[100vw]  flex items-center justify-center">
-      <div className=" w-full max-w-md p-14 bg-white shadow-lg rounded-xl ml-3 items-center justify-center m-8">
-        <h1 className="text-4xl mb-6 flex  justify-center">Log in</h1>
+    <div className="bg-gray-100 w-[100vw]  flex flex-wrap items-center justify-center">
+      <div className=" w-full max-w-md p-14 bg-white shadow-lg rounded-xl ml-3 items-center justify-center flex flex-wrap m-8">
+        <h1 className="text-4xl mb-6 flex flex-wrap  justify-center">Log in</h1>
 
         <form onSubmit={handleLogin}>
           {" "}
           {/*  Form submission calls handleLogin */}
-          <div className="mb-4">
+          <div className="mb-4 flex flex-wrap">
             <label className="block text-sm font-medium text-gray-700">
               Email address
             </label>
             <input
               type="email"
-              className="w-full p-2 mt-1 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full flex flex-wrap p-2 mt-1 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}

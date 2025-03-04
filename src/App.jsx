@@ -1,4 +1,5 @@
-import React from "react";
+import React  from "react";
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -10,7 +11,8 @@ import GroupPage from "./pages/GroupPage";
 import NotFound from "./components/NotFound";
 import HomePage from "./pages/HomePage";
 import SignupPage from "./pages/SignupPage";
-import Groups from "./components/Groups";
+
+
 
 
 
@@ -20,6 +22,7 @@ function Layout() {
   // Hide Navbar if the page is NotFound (i.e., when path is not in known routes)
   const validPaths = [];
   const showNavbar = validPaths.includes(location.pathname);
+ 
 
   return (
     <div>
@@ -28,7 +31,6 @@ function Layout() {
         <Route path="/" element={<HomePage />} />
         <Route path="/Login" element={<LoginPage />} />
         <Route path="/GroupPage" element={<GroupPage />} />
-        <Route path="/GroupPage/Groups" element={<Groups />} />
         <Route path="/Signup" element={<SignupPage />} />
         <Route path="*" element={<NotFound />} />
 
