@@ -35,6 +35,30 @@ const data = [
       members: "10",
       balance: "46,000"
     },
+    {
+      id: 7,
+      groupname: "Pune",
+      members: "6",
+      balance: "50,000"
+    },
+    {
+      id: 8,
+      groupname: "Punjab",
+      members: "8",
+      balance: "11,000"
+    },
+    {
+      id: 9,
+      groupname: "Haridwar",
+      members: "12",
+      balance: "53,000"
+    },
+    {
+      id: 10,
+      groupname: "Jaipur",
+      members: "4",
+      balance: "12,000"
+    },
   ];
   
   export default data; 

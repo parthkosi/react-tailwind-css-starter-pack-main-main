@@ -3,11 +3,11 @@ import GroupData from "./GroupData";
 import data from "../data";
 
 const Groups = () => {
-  const [groupdata, setGroupData] = useState(data);
+  const [groupdata, setgroupdata] = useState(data);
 
   function removeGroup(id) {
     const newGroup = groupdata.filter((group) => group.id !== id);
-    setGroupData(newGroup);
+    setgroupdata(newGroup);
   }
 
   return (
@@ -24,7 +24,7 @@ const Groups = () => {
       <div className="flex justify-center p-4">
         <button
           className="bg-green-500 text-white rounded px-4 py-2 hover:bg-green-600"
-          onClick={() => setGroupData(data)}
+          onClick={() => setgroupdata(data)}
         >
           undo
         </button>

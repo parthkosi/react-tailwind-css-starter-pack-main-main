@@ -9,7 +9,7 @@ function Form() {
   function handleLogin(event) {
     event.preventDefault(); // Prevent form submission refresh
     if (email && password) {
-      navigate("/GroupPage"); // Navigate to GroupPage after login
+      navigate("/GroupPage/dashboard"); // Navigate to GroupPage/dashboard after login
     }
   }
   return (

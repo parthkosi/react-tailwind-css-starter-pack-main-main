@@ -1,83 +1,81 @@
-import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import React from "react";
 import Navbar from "../components/Navbar";
 import Activity from "../components/Activity";
 import Groups from "../components/Groups";
 import Friends from "../components/Friends";
 import Account from "../components/Account";
 import Dashboard from "../components/Dashboard";
-
-const sections = {
-  Dashboard: <Dashboard />,
-  Groups: <Groups />,
-  Friends: <Friends />,
-  Activity: <Activity />,
-  Account: <Account />,
-};
+import NotFound from "../components/NotFound";
 
 const GroupPage = () => {
-  // Retrieve selected section from localStorage, defaulting to "Dashboard"
-  const [selectedSection, setSelectedSection] = useState(
-    localStorage.getItem("selectedSection") || "Dashboard"
-  );
+  const navigate = useNavigate();
+  const location = useLocation(); // Get current route
 
-  useEffect(() => {
-    localStorage.setItem("selectedSection", selectedSection);
-  }, [selectedSection]);
-
-  // Function to handle section selection
-  const handleNavigation = (section) => {
-    setSelectedSection(section);
+  // Function to handle navigation
+  const handleNavigation = (path) => {
+    navigate(path);
   };
 
   // Function to handle logout
   const handleLogout = () => {
-    localStorage.removeItem("selectedSection");
-    setSelectedSection("Dashboard");
+    navigate("/login"); // Redirect to login
   };
 
   return (
     <div className="h-screen flex flex-col bg-gray-100">
-      {/*  Fixed Navbar */}
+      {/* Fixed Navbar */}
       <div className="fixed top-0 left-0 w-full z-50 bg-white shadow-md">
         <Navbar />
       </div>
 
-      {/*  Main Content Wrapper */}
+      {/* Main Content Wrapper */}
       <div className="flex flex-grow pt-16">
-        {/*  Fixed Sidebar */}
+        {/* Fixed Sidebar */}
         <nav className="fixed top-16 left-0 h-[calc(100vh-4rem)] w-48 bg-white border-r border-black flex flex-col shadow-lg">
           <div className="flex flex-col">
-            {Object.keys(sections).map((section) => (
+            {[
+              { name: "Dashboard", path: "/GroupPage/dashboard" },
+              { name: "Groups", path: "/GroupPage/groups" },
+              { name: "Friends", path: "/GroupPage/friends" },
+              { name: "Activity", path: "/GroupPage/activity" },
+              { name: "Account", path: "/GroupPage/account" },
+            ].map(({ name, path }) => (
               <button
-                key={section}
-                onClick={() => handleNavigation(section)}
-                className={`p-3 hover:bg-gray-50 border-b border-gray-200 ${
-                  selectedSection === section
-                    ? "text-black font-semibold bg-gray-100"
-                    : "text-gray-600"
+                key={name}
+                onClick={() => handleNavigation(path)}
+                className={`p-3 border-b border-gray-200 transition-all ${
+                  location.pathname === path
+                    ? "bg-gray-800 text-white font-semibold"
+                    : "text-gray-600 hover:bg-gray-100"
                 }`}
               >
-                {section}
+                {name}
               </button>
             ))}
           </div>
 
           {/* Logout Button */}
           <div className="mt-auto p-2 border-t border-gray-200">
-            <Link to="/Login" onClick={handleLogout}>
-              <button className="w-full py-2.5 bg-teal-500 hover:bg-teal-600 text-white rounded-md transition-colors">
-                Logout
-              </button>
-            </Link>
+            <button
+              onClick={handleLogout}
+              className="w-full py-2.5 bg-teal-500 hover:bg-teal-600 text-white rounded-md transition-colors"
+            >
+              Logout
+            </button>
           </div>
         </nav>
 
-        {/*  Main Content Area */}
-        <div className="ml-48 flex-1 overflow-y-auto">
-          <div className="bg-white rounded-lg  ">
-            {sections[selectedSection]}
-          </div>
+        {/* Main Content Area with Routes */}
+        <div className="ml-48 flex-1 overflow-y-auto p-4">
+          <Routes>
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="groups" element={<Groups />} />
+            <Route path="friends" element={<Friends />} />
+            <Route path="activity" element={<Activity />} />
+            <Route path="account" element={<Account />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </div>
       </div>
     </div>
