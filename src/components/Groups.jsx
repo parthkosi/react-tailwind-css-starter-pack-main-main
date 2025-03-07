@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import GroupData from "./GroupData";
 import data from "../data";
+import { toast } from "react-toastify";
 
 const Groups = () => {
   const [groupdata, setgroupdata] = useState(data);
 
   function removeGroup(id) {
+    toast.success("Group Deleted")
     const newGroup = groupdata.filter((group) => group.id !== id);
     setgroupdata(newGroup);
   }

@@ -7,6 +7,7 @@ import Friends from "../components/Friends";
 import Account from "../components/Account";
 import Dashboard from "../components/Dashboard";
 import NotFound from "../components/NotFound";
+import { toast } from "react-toastify";
 
 const GroupPage = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const GroupPage = () => {
 
   // Function to handle logout
   const handleLogout = () => {
+    toast.success("Logout Successfully")
     navigate("/login"); // Redirect to login
   };
 

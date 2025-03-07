@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Form() {
   const [email, setEmail] = useState("");
@@ -9,6 +10,7 @@ function Form() {
   function handleLogin(event) {
     event.preventDefault(); // Prevent form submission refresh
     if (email && password) {
+      toast.success("login successfully")
       navigate("/GroupPage/dashboard"); // Navigate to GroupPage/dashboard after login
     }
   }
