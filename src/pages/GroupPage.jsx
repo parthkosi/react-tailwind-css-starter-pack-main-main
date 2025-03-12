@@ -20,12 +20,12 @@ const GroupPage = () => {
 
   // Function to handle logout
   const handleLogout = () => {
-    toast.success("Logout Successfully")
+    toast.success("Logout Successfully");
     navigate("/login"); // Redirect to login
   };
 
   return (
-    <div className="h-screen flex flex-col bg-gray-100">
+    <div className="h-full flex flex-col bg-gray-100">
       {/* Fixed Navbar */}
       <div className="fixed top-0 left-0 w-full z-50 bg-white shadow-md">
         <Navbar />
