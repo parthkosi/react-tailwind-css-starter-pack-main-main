@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import GroupData from "./GroupData";
 import data from "../data";
+import Sidebar from "./Sidebar";
 import { toast } from "react-toastify";
+import Navbar from "./Navbar";
 
 const Groups = () => {
   const [groupdata, setgroupdata] = useState(data);
@@ -11,9 +13,9 @@ const Groups = () => {
   const [balance, setBalance] = useState("");
 
   function removeGroup(id) {
-    toast.success("Group Deleted");
     const newGroup = groupdata.filter((group) => group.id !== id);
     setgroupdata(newGroup);
+    toast.success("Group Deleted");
   }
 
   function handleNewGroup() {
@@ -39,6 +41,8 @@ const Groups = () => {
 
   return (
     <div className="w-full h-full flex flex-col bg-gray-100 relative">
+      <Navbar />
+      <Sidebar />
       {/* Header */}
       <div className="fixed top-14 left-48 w-[calc(100%-12rem)] bg-yellow-500 shadow-md p-4 flex justify-between items-center z-10">
         <h1 className="text-2xl font-semibold">Group List</h1>

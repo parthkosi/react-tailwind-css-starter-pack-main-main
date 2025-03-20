@@ -3,7 +3,7 @@ import Card from "./Card";
 
 const GroupData = ({ groupdata, removegroup }) => {
   return (
-    <div className="p-4 grid gap-4">
+    <div className="p-4 grid gap-4 mt-14">
       {groupdata.map((group) => (
         <Card key={group.id} {...group} removegroup={removegroup} />
       ))}

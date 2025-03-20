@@ -59,12 +59,7 @@ const data = [
       members: "4",
       balance: "12,000"
     },
-    {
-      id: 11,
-      groupname: "Jaipur",
-      members: "4",
-      balance: "12,000"
-    },
+
   ];
   
   export default data; 
