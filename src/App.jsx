@@ -11,6 +11,8 @@ import Account from "./components/Account";
 import Friends from "./components/Friends";
 import Activity from "./components/Activity";
 import Dashboard from "./components/Dashboard";
+import store from "./redux/slice/Store";
+import { Provider } from "react-redux";
 
 function Layout() {
   return (
@@ -35,9 +37,11 @@ function App() {
   return (
     <div>
       <ToastContainer />
-      <Router>
-        <Layout />
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <Layout />
+        </Router>
+      </Provider>
     </div>
   );
 }

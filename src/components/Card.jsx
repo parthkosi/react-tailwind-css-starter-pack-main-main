@@ -7,7 +7,7 @@ const Card = ({ id, groupname, members, balance, removegroup }) => {
       <div className="flex justify-between">
         <h2 className="text-xl font-semibold">{groupname}</h2>
         <button
-          onClick={() => removegroup(id)}
+          onClick={() => removegroup(id, groupname)}
           className="text-red-600 hover:text-red-800"
         >
           <MdDeleteOutline size={24} />

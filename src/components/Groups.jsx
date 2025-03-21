@@ -12,10 +12,10 @@ const Groups = () => {
   const [members, setMembers] = useState("");
   const [balance, setBalance] = useState("");
 
-  function removeGroup(id) {
+  function removeGroup(id, groupname) {
     const newGroup = groupdata.filter((group) => group.id !== id);
     setgroupdata(newGroup);
-    toast.success("Group Deleted");
+    toast.success(`${groupname} Group is Deleted`);
   }
 
   function handleNewGroup() {
