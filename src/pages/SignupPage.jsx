@@ -10,11 +10,30 @@ function SignupPage() {
   const navigate = useNavigate(); // Navigation Hook
 
   // Handle Signup Form Submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent Page Reload
-    if (email && password && name) {
-      toast.success("SignUp Successfully")
-      navigate("/GroupPage/dashboard"); // Redirect to Dashboard
+
+    if (!email || !password || !name) {
+      toast.error("Please fill all fields");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        toast.success("Signup Successful!");
+        navigate("/GroupPage/dashboard"); // Redirect to Dashboard
+      } else {
+        toast.error(data.error || "Signup failed");
+      }
+    } catch (error) {
+      toast.error("Something went wrong. Try again later.");
     }
   };
 
@@ -26,7 +45,7 @@ function SignupPage() {
           <h1 className="text-3xl font-semibold text-center mb-6 text-gray-800">
             Sign Up
           </h1>
-          
+
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
@@ -41,7 +60,7 @@ function SignupPage() {
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700">
                 Email address
@@ -86,18 +105,6 @@ function SignupPage() {
               Log in
             </Link>
           </div>
-
-          {/* OR Divider */}
-          <div className="flex items-center justify-center my-4">
-            <div className="flex-1 border-t border-gray-300"></div>
-            <span className="px-4 text-gray-500 text-sm">or</span>
-            <div className="flex-1 border-t border-gray-300"></div>
-          </div>
-
-          {/* Google Signup */}
-          <button className="w-full py-2 border rounded-md hover:bg-gray-200 border-gray-400 transition">
-            Sign up with Google
-          </button>
         </div>
       </div>
     </div>

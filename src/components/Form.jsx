@@ -7,13 +7,33 @@ function Form() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate(); // Hook for navigation
 
-  function handleLogin(event) {
-    event.preventDefault(); // Prevent form submission refresh
-    if (email && password) {
-      toast.success("login successfully")
-      navigate("/GroupPage/dashboard"); // Navigate to GroupPage/dashboard after login
+  async function handleLogin(event) {
+    event.preventDefault(); // Prevent form refresh
+  
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        toast.success("Login successful!");
+        localStorage.setItem("token", data.token); // Store token in localStorage
+        navigate("/GroupPage/dashboard"); // Redirect after login
+      } else {
+        toast.error(data.message || "Login failed!");
+      }
+    } catch (error) {
+      toast.error("Something went wrong. Try again later.");
+      console.error("Login error:", error);
     }
   }
+  
   return (
     <div className="bg-gray-100 w-[100vw]  flex flex-wrap items-center justify-center">
       <div className=" w-full max-w-md p-14 bg-white shadow-lg rounded-xl ml-3 items-center justify-center flex flex-wrap m-8">
