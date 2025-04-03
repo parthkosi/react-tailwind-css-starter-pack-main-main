@@ -89,7 +89,7 @@ function Form() {
         </form>
 
         <div className="mt-4 text-center mb-5">
-          <Link to="#" className="text-teal-600 hover:underline">
+          <Link to="/password_reset" className="text-teal-600 hover:underline">
             Forgot your password?
           </Link>
         </div>

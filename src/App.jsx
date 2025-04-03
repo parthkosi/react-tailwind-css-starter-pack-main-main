@@ -7,6 +7,7 @@ import NotFound from "./components/NotFound";
 import HomePage from "./pages/HomePage";
 import Groups from "./components/Groups";
 import SignupPage from "./pages/SignupPage";
+import ForgotPassword from "./components/ForgotPassword";
 import Account from "./components/Account";
 import Friends from "./components/Friends";
 import Activity from "./components/Activity";
@@ -21,6 +22,7 @@ function Layout() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/password_reset" element={<ForgotPassword />} />
         <Route path="/GroupPage/groups" element={<Groups />} />
         <Route path="/GroupPage/account" element={<Account />} />
         <Route path="/GroupPage/friends" element={<Friends />} />
