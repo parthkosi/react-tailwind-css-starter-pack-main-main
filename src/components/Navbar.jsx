@@ -6,7 +6,7 @@ const Navbar = () => {
     <div className="fixed top-0 left-0 w-full bg-black shadow-md px-6 py-3 flex flex-wrap justify-between items-center z-50">
       {/*  Logo */}
       <Link to="/" className="text-white text-2xl font-bold flex-wrap">
-        Splitwise
+        TrueSplits
       </Link>
 
       {/*  Buttons */}
