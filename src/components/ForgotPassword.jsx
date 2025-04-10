@@ -55,7 +55,7 @@ const ForgotPassword = () => {
     } else {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/auth/verify_otp",
+          "https://backend-etx6.onrender.com/api/auth/verify_otp",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },

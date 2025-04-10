@@ -7,12 +7,11 @@ require("dotenv").config();
 const MONGO_URL = process.env.MONGO_URL;
 
 // Enable CORS Middleware
-app.use(
-  cors({
-    origin: "http://localhost:3000", // Allow requests from frontend
-    credentials: true, // Allow cookies/auth headers if needed
-  })
-);
+app.use(cors({
+  origin: "https://truesplits.netlify.app",  // Netlify frontend
+  credentials: true
+}));
+
 
 // Middleware
 app.use(express.json());
