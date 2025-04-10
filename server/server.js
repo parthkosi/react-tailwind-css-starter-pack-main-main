@@ -8,9 +8,10 @@ const MONGO_URL = process.env.MONGO_URL;
 
 // Enable CORS Middleware
 app.use(cors({
-  origin: ["http://localhost:3000", "https://truesplits.netlify.app"], // your local and deployed frontend URLs
+  origin: ["http://localhost:3000", "https://truesplits.netlify.app"],
   credentials: true,
 }));
+
 
 
 // Middleware
