@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -12,22 +12,12 @@ const ResetPassword = () => {
   const email = location.state?.email;
   const otp = location.state?.otp;
 
-  // Redirect if no email/otp found in state
-  useEffect(() => {
-    if (!email || !otp) {
-      setTimeout(() => {
-        toast.error("Access denied. Please verify OTP first.");
-        navigate("/password_reset");
-      }, 100);
-    }
-  }, [email, otp, navigate]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const response = await fetch(
-        "https://backend-etx6.onrender.com/api/auth/reset_password",
+        "http://localhost:5000/api/auth/reset_password",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

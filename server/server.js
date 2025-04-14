@@ -26,6 +26,7 @@ global.otpStore = {};
 // Import and Use Routes
 const auth = require("./routes/auth");
 app.use("/api/auth", auth);
+app.use("/api/friends",auth );
 
 // Check if MongoDB URL exists
 if (!MONGO_URL) {
