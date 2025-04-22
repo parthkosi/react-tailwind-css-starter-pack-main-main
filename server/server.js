@@ -7,26 +7,34 @@ require("dotenv").config();
 const MONGO_URL = process.env.MONGO_URL;
 
 // Enable CORS Middleware
-app.use(cors({
-  origin: ["http://localhost:3000", "https://truesplits.netlify.app"],
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://truesplits.netlify.app"],
+    credentials: true,
+  })
+);
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
   res.header("Access-Control-Allow-Credentials", "true");
   next();
 });
-
 
 // Middleware
 app.use(express.json());
 global.otpStore = {};
 
 // Import and Use Routes
-const auth = require("./routes/auth");
-app.use("/api/auth", auth);
-app.use("/api/friends",auth );
+const authRoutes = require("./routes/auth");
+const friendRoutes = require("./routes/friends");
+const groupRoutes = require("./routes/groups");
+
+app.use("/api/auth", authRoutes);
+app.use("/api/friends", friendRoutes);
+app.use("/api/groups", groupRoutes);
 
 // Check if MongoDB URL exists
 if (!MONGO_URL) {
