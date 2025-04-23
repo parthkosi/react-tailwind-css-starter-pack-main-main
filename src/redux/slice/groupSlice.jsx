@@ -1,10 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  groups: [
-    { id: 1, name: "Trip to Goa", members: ["Rohan", "Kabir"], balance: -200 },
-    { id: 2, name: "Office Party", members: ["Jay", "Dev"], balance: 450 },
-  ],
+  groups: [],
 };
 
 const groupSlice = createSlice({
