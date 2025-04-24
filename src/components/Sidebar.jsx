@@ -1,4 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
+import { clearToken } from "../utils/auth";
 import { toast } from "react-toastify";
 
 const Sidebar = () => {
@@ -13,6 +14,7 @@ const Sidebar = () => {
   // Function to handle logout
   const handleLogout = () => {
     toast.success("Logout Successfully");
+    clearToken(); // Private Routing
     navigate("/login"); // Redirect to login
   };
 

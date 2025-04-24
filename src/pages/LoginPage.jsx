@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { setToken } from "../utils/auth";
 import { toast } from "react-toastify";
 
 const LoginPage = () => {
@@ -24,7 +25,7 @@ const LoginPage = () => {
 
       if (response.ok) {
         toast.success("Login successful!");
-        localStorage.setItem("token", data.token); // Store token
+        setToken(); // Store token
         navigate("/GroupPage/dashboard"); // Redirect after login
       } else {
         toast.error(data.message || "Login failed!");
