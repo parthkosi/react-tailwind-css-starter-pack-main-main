@@ -4,10 +4,11 @@ const {
   addGroup,
   deleteGroup,
 } = require("../controllers/groupController");
+const { authenticate } = require("../middlewares/authMiddleware");
 
 const router = express.Router();
-router.get("/", getGroups);
-router.post("/", addGroup);
-router.delete("/:id", deleteGroup);
+router.get("/", authenticate, getGroups);
+router.post("/", authenticate, addGroup);
+router.delete("/:id", authenticate, deleteGroup);
 
 module.exports = router;

@@ -10,10 +10,20 @@ const Friends = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [balance, setBalance] = useState("");
-  
+
+  const getAuthHeaders = () => {
+    const token = localStorage.getItem("token");
+    return {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+  };
+
   const fetchFriends = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/friends");
+      const response = await fetch("http://localhost:5000/api/friends", {
+        headers: getAuthHeaders(),
+      });
       const data = await response.json();
       setFriends(data);
     } catch (error) {
@@ -32,22 +42,20 @@ const Friends = () => {
       toast.error("Please fill all fields!");
       return;
     }
-
+  
     const newFriend = {
       name,
       phone: Number(phone),
       balance: Number(balance),
     };
-
+  
     try {
       const response = await fetch("http://localhost:5000/api/friends", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: getAuthHeaders(),
         body: JSON.stringify(newFriend),
       });
-
+  
       if (response.ok) {
         toast.success("New Friend Added!");
         fetchFriends(); // Refresh the list after adding a new friend
@@ -56,18 +64,22 @@ const Friends = () => {
         setPhone("");
         setBalance("");
       } else {
-        toast.error("Failed to add friend.");
+        const data = await response.json();
+        toast.error(data.error || "Failed to add friend.");
       }
     } catch (error) {
       toast.error("Something went wrong");
+      console.error("Error adding friend:", error);  // Log to see the full error
     }
   };
+  
 
   // Handle friend removal
   const handleRemoveFriend = async (id, name) => {
     try {
       const response = await fetch(`http://localhost:5000/api/friends/${id}`, {
         method: "DELETE",
+        headers: getAuthHeaders(),
       });
 
       if (response.ok) {

@@ -11,9 +11,19 @@ const Group = () => {
   const [members, setMembers] = useState("");
   const [balance, setBalance] = useState("");
 
+  const getAuthHeaders = () => {
+    const token = localStorage.getItem("token");
+    return {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+  };
+
   const fetchGroups = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/groups");
+      const response = await fetch("http://localhost:5000/api/groups", {
+        headers: getAuthHeaders(),
+      });
       const data = await response.json();
       setGroups(data);
     } catch (error) {
@@ -41,9 +51,7 @@ const Group = () => {
     try {
       const response = await fetch("http://localhost:5000/api/groups", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: getAuthHeaders(),
         body: JSON.stringify(newGroup),
       });
 
@@ -66,6 +74,7 @@ const Group = () => {
     try {
       const response = await fetch(`http://localhost:5000/api/groups/${id}`, {
         method: "DELETE",
+        headers: getAuthHeaders(),
       });
 
       if (response.ok) {
