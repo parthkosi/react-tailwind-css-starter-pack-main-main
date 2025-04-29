@@ -31,10 +31,13 @@ global.otpStore = {};
 const authRoutes = require("./routes/auth");
 const friendRoutes = require("./routes/friends");
 const groupRoutes = require("./routes/groups");
+const userRoutes = require("./routes/user")
 
 app.use("/api/auth", authRoutes);
 app.use("/api/friends", friendRoutes);
 app.use("/api/groups", groupRoutes);
+app.use('/api', userRoutes);
+
 
 // Check if MongoDB URL exists
 if (!MONGO_URL) {

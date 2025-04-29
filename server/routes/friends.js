@@ -4,7 +4,7 @@ const {
   addFriend,
   removeFriend,
 } = require("../controllers/friendController");
-const { authenticate } = require("../middlewares/authMiddleware");
+const authenticate = require("../middlewares/authMiddleware");
 
 const router = express.Router();
 
