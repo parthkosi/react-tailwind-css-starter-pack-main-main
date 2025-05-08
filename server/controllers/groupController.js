@@ -1,10 +1,11 @@
 const Group = require("../models/Group");
+const axios = require("axios");
 
 // Create New Group
 exports.addGroup = async (req, res) => {
   try {
     const { name, members, balance } = req.body;
-    const userId = req.userId; // Getting from authenticated user
+    const userId = req.userId;
 
     if (!name) {
       return res.status(400).json({ error: "Group name is required" });
@@ -12,13 +13,22 @@ exports.addGroup = async (req, res) => {
 
     const newGroup = new Group({
       name,
-      members: members || 0, // Default 0 if not given
-      balance: balance || 0, // Default 0 if not given
+      members: members || 0,
+      balance: balance || 0,
       userId,
     });
 
     await newGroup.save();
-    res.status(201).json({ message: "Group created successfully", group: newGroup });
+
+    // Log the activity
+    await axios.post("http://localhost:5000/api/activity/log", {
+      userId,
+      action: `Group "${name}" was created.`,
+    });
+
+    res
+      .status(201)
+      .json({ message: "Group created successfully", group: newGroup });
   } catch (error) {
     console.error("Error creating group:", error);
     res.status(500).json({ error: "Server error" });
@@ -49,6 +59,12 @@ exports.deleteGroup = async (req, res) => {
     if (!group) {
       return res.status(404).json({ error: "Group not found or unauthorized" });
     }
+
+    // Log the activity
+    await axios.post("http://localhost:5000/api/activity/log", {
+      userId,
+      action: `Group "${group.name}" was deleted.`,
+    });
 
     res.json({ message: "Group deleted successfully" });
   } catch (error) {

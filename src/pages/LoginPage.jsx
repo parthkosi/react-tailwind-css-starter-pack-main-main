@@ -26,6 +26,7 @@ const LoginPage = () => {
       if (response.ok) {
         toast.success("Login successful!");
         setToken(data.token); // Save the token in localStorage
+        localStorage.setItem("userId", data.userId);
         navigate("/GroupPage/dashboard"); // Redirect after login
       } else {
         toast.error(data.message || "Login failed!");

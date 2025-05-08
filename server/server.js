@@ -32,11 +32,15 @@ const authRoutes = require("./routes/auth");
 const friendRoutes = require("./routes/friends");
 const groupRoutes = require("./routes/groups");
 const userRoutes = require("./routes/user")
+const activityRoutes = require("./routes/activity");
+
+
 
 app.use("/api/auth", authRoutes);
 app.use("/api/friends", friendRoutes);
 app.use("/api/groups", groupRoutes);
 app.use('/api', userRoutes);
+app.use("/api/activity", activityRoutes);
 
 
 // Check if MongoDB URL exists
