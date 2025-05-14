@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
@@ -19,7 +19,7 @@ const Group = () => {
     };
   };
 
-  const fetchGroups = async () => {
+  const fetchGroups = useCallback(async () => {
     try {
       const response = await fetch("http://localhost:5000/api/groups", {
         headers: getAuthHeaders(),
@@ -30,11 +30,11 @@ const Group = () => {
       console.error("Error fetching groups:", error);
       toast.error("Failed to fetch groups.");
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchGroups();
-  }, []);
+  }, [fetchGroups]);
 
   const handleAddGroup = async () => {
     if (!groupName || !members || !balance) {

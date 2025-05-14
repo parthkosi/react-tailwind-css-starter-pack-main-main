@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
@@ -19,7 +19,7 @@ const Friends = () => {
     };
   };
 
-  const fetchFriends = async () => {
+  const fetchFriends = useCallback(async () => {
     try {
       const response = await fetch("http://localhost:5000/api/friends", {
         headers: getAuthHeaders(),
@@ -30,35 +30,34 @@ const Friends = () => {
       console.error("Error fetching friends:", error);
       toast.error("Failed to fetch friends.");
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchFriends();
-  }, []);
+  }, [fetchFriends]);
 
-  // Handle new friend addition
   const handleAddFriend = async () => {
     if (!name || !phone || !balance) {
       toast.error("Please fill all fields!");
       return;
     }
-  
+
     const newFriend = {
       name,
       phone: Number(phone),
       balance: Number(balance),
     };
-  
+
     try {
       const response = await fetch("http://localhost:5000/api/friends", {
         method: "POST",
         headers: getAuthHeaders(),
         body: JSON.stringify(newFriend),
       });
-  
+
       if (response.ok) {
         toast.success("New Friend Added!");
-        fetchFriends(); // Refresh the list after adding a new friend
+        fetchFriends();
         setShowModal(false);
         setName("");
         setPhone("");
@@ -69,12 +68,10 @@ const Friends = () => {
       }
     } catch (error) {
       toast.error("Something went wrong");
-      console.error("Error adding friend:", error);  // Log to see the full error
+      console.error("Error adding friend:", error);
     }
   };
-  
 
-  // Handle friend removal
   const handleRemoveFriend = async (id, name) => {
     try {
       const response = await fetch(`http://localhost:5000/api/friends/${id}`, {
@@ -95,14 +92,10 @@ const Friends = () => {
 
   return (
     <div className="flex">
-      {/* Sidebar */}
       <Sidebar />
-      
-      {/* Main Content Area */}
       <div className="flex-1 ml-48 bg-gray-100">
         <Navbar />
-        
-        {/* Header */}
+
         <div className="fixed top-14 left-48 w-[calc(100%-12rem)] bg-yellow-500 shadow-md p-4 flex justify-between items-center z-10">
           <h1 className="text-2xl font-semibold">Friends List</h1>
           <button
@@ -113,7 +106,6 @@ const Friends = () => {
           </button>
         </div>
 
-        {/* Friend List */}
         <div className="mt-32 p-4">
           {friends.length > 0 ? (
             <div className="grid gap-4">
@@ -147,7 +139,6 @@ const Friends = () => {
           )}
         </div>
 
-        {/* New Friend Form Modal */}
         {showModal && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-20">
             <div className="bg-white p-6 rounded-lg shadow-md w-96">
